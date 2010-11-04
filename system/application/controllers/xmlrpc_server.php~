@@ -1,0 +1,66 @@
+<?php
+
+class Xmlrpc_server extends Controller {
+
+	function index()
+	{
+		$this->load->library('xmlrpc');
+		$this->load->library('xmlrpcs');
+		
+		$config['functions']['AddHostFreeform'] = array('function' => 'Xmlrpc_server.AddHostFreeform');
+		
+		$this->xmlrpcs->initialize($config);
+		$this->xmlrpcs->serve();
+	}
+	
+function AddHostFreeform($request)
+        {
+		
+                $parameters = $request->output_parameters();
+
+                //Api key for client
+		$key = "test1";
+
+		//get apikey from request
+		$apikey = $parameters['0']['apikey'];
+		$hostname = $parameters['1']['host'];
+		$filename = "/var/www/domains/".$hostname.".cfg"; 
+		//Logic to fail if hostname-parameter is not sent		
+
+		if($apikey == $key){
+			   //If a file with suggested filename/hostname exist
+
+			   if (file_exists($filename)) {
+			      return $this->xmlrpc->send_error_message('002', 'Host Exist');
+			      }
+		
+		else{
+		//Create the file based on parameters sent
+
+		//foreach($parameters['1'] as $key=>$value):
+    				
+				
+				
+				
+    	 	 //endforeach;		
+
+		//Send response array
+		       $response = array(
+
+                                                        array(
+                                                             $parameters['1']['host']),
+                                                        'struct');
+
+                		return $this->xmlrpc->send_response($response);
+		       }
+		}
+		
+		//If the API-key is wrong
+		else{
+		return $this->xmlrpc->send_error_message('001', 'Auth Failed');
+		} 
+	}
+
+
+}
+?>
