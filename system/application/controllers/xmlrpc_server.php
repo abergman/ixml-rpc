@@ -6,7 +6,7 @@ class Xmlrpc_server extends Controller {
 	{
 		$this->load->library('xmlrpc');
 		$this->load->library('xmlrpcs');
-		
+		$this->load->helper('file');		
 		$config['functions']['AddHostFreeform'] = array('function' => 'Xmlrpc_server.AddHostFreeform');
 		
 		$this->xmlrpcs->initialize($config);
@@ -37,23 +37,33 @@ function AddHostFreeform($request)
 		else{
 
 		//Create the file based on parameters sent
-		//Open file
-		
+		$filedata = "define host{ \n"; 
+
 		foreach($parameters['1'] as $key=>$value):
     		
-		$data[$key] = $value;		
+		$data[$key] = $key;		
+		$filedata .= $data[$key]." ". $value."\n"; 
 							
     	 	 endforeach;		
-
+		 $filedata .= "}";
+		 
+		 //If file cannot be written
+		 if(!write_file($filename, $filedata)){
+		 return $this->xmlrpc->send_error_message('003', 'Write Failed');
+		 }
+		 //If everything seems ok
+		 else{
 		//Send response array
 		       $response = array(
 
                                                         array(
-                                                             $data['host'],$data['adress']),
+                                                             $filedata),
                                                         'struct');
 
                 		return $this->xmlrpc->send_response($response);
+		}
 		       }
+		
 		}
 		
 		//If the API-key is wrong
