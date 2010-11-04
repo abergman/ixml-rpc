@@ -1,0 +1,15 @@
+Andreas Bergman 2010-11-04 andreas@abergman.se
+The Script is provided AS-IS without any warranty.
+
+The framework used is CodeIgniter 1.7.2
+
+The system presumes that it is installed i /var/www and that the folder /var/www/domains is writeable by the webbserver.
+
+system/application/xmlrpc_client.php is a sample/debug client for the xmlrpc_server.php
+system/application/xmlrpc_server.php is the actual xmlrpc_server
+
+Available methods
+
+* AddHostFreeform
+
+The method forwards the associative array sent form the client and writes a hostdefinition from it. See code in xmlrpc_client.php for example.
