@@ -35,3 +35,9 @@ The method creates an host from a template based on values passed on by the clie
 	The values is inserted into the template matching the placeholders in the template.
 	A placeholder is #host# and if you pass on 'host' on the associative array, #host# will be replaced with it's value.
 	
+
+===== Error Codes ====
+001 Auth Failed - The specified apikey is wrong or malformed
+002 Host Exist - It the created host already exist, to update existing host, use the ChangeHost(Not yet implemented) methods.
+003 Write failed - If the writing of a file failed, this error is shown, most likely it failed due to wrong permissions.
+004 No template specified - If using the template methods and the second array don't contain the 'template' value.	
