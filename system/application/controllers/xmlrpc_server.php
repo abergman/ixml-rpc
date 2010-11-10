@@ -37,7 +37,7 @@ function AddHostFreeform($request)
 		else{
 
 		//Create the file based on parameters sent
-		$filedata = "define host{ \n"; 
+		$filedata = ""; 
 
 		foreach($parameters['1'] as $key=>$value):
     		
@@ -45,7 +45,7 @@ function AddHostFreeform($request)
 		$filedata .= $data[$key]." ". $value."\n"; 
 							
     	 	 endforeach;		
-		 $filedata .= "}";
+		 
 		 
 		 //If file cannot be written
 		 if(!$this->Icinga_model->write_host($filename, $filedata)){

@@ -10,11 +10,15 @@ parent::Model();
     }
 	
 	function write_host($filename,$filedata){
-		 if(!write_file($filename,$filedata)){
+		 $writedata = "define host{\n".$filedata."}\n";
+		 
+		 if(!write_file($filename,$writedata)){
 			return '0';		
 		}
 		else{ 			
+
 			return '1';	
+
 		}	
 	
 	
