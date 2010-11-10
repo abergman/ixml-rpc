@@ -88,6 +88,16 @@ function AddHostFromTemplate($request)
 		$templatedata[$key] = $value;
 				
 		}		   
+		//Check if templatename is set
+		if(!$templatedata['template']){
+		return $this->xmlrpc->send_error_message('004', 'No template specified');
+		}else{
+		//If it is set.. keep on rockin'
+		
+		//Send values to method for eval and if lucky, writing
+		
+		//If the values is the request don't exist in the template as placeholders, send 005 Values out of bounds
+
 		$response = array(
 
                      	                                  
@@ -95,7 +105,7 @@ function AddHostFromTemplate($request)
                                                         'struct');
 
                                 return $this->xmlrpc->send_response($response);
-
+				}
 		}	
 		else{
 			return $this->xmlrpc->send_error_message('001', 'Auth Failed');
