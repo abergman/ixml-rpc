@@ -2,14 +2,36 @@ Andreas Bergman 2010-11-04 andreas@abergman.se
 The Script is provided AS-IS without any warranty.
 
 The framework used is CodeIgniter 1.7.2
+========== Folders ===========
 
-The system presumes that it is installed i /var/www and that the folder /var/www/domains is writeable by the webbserver.
+The system presumes that it is installed i /var/www and that the foldes below is writeable by the webbserver.
 
-system/application/xmlrpc_client.php is a sample/debug client for the xmlrpc_server.php
-system/application/xmlrpc_server.php is the actual xmlrpc_server
+/var/www/domains
+/var/www/templates
 
-Available methods
+======== Settings ==========
+The settings is configured in config/icinga.php the file should be self explainatory
+
+======= Files =====
+system/application/controllers/xmlrpc_client.php is a sample/debug client for the xmlrpc_server.php
+system/application/controllers/xmlrpc_server.php is the actual xmlrpc_server
+system/application/models/icinga_model.php	The modelfile for handling filewriting
+
+
+======== Mandatory values ========
+The first associative array should always be 'apikey', with the value specified in the config.
+========== Available methods========
 
 * AddHostFreeform
 
 The method forwards the associative array sent form the client and writes a hostdefinition from it. See code in xmlrpc_client.php for example.
+	- Values
+	The host is created from the values passed on in the second array, these should comply with the icinga hostdefinition.
+
+* AddHostFromTemplate(Unfinished)
+
+The method creates an host from a template based on values passed on by the client
+	- Values
+	The values is inserted into the template matching the placeholders in the template.
+	A placeholder is #host# and if you pass on 'host' on the associative array, #host# will be replaced with it's value.
+	
