@@ -41,3 +41,5 @@ The method creates an host from a template based on values passed on by the clie
 002 Host Exist - It the created host already exist, to update existing host, use the ChangeHost(Not yet implemented) methods.
 003 Write failed - If the writing of a file failed, this error is shown, most likely it failed due to wrong permissions.
 004 No template specified - If using the template methods and the second array don't contain the 'template' value.	
+005 Values out of bounds - If using the template methods and the values from the client don't exist as placeholders, this is sent
+
