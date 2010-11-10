@@ -13,7 +13,7 @@ parent::Model();
 		 $writedata = "define host{\n".$filedata."}\n";
 		 
 		 if(!write_file($filename,$writedata)){
-			return '0';		
+			
 		}
 		else{ 			
 
