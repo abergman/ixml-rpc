@@ -56,9 +56,9 @@ function AddHostFreeform($request)
 		 //If everything seems ok
 		 else{
 		//Send response array
-		       $response = array(
+		       $response = array(array(
 
-                                                        array(
+                                                        
                                                              $filedata),
                                                         'struct');
 
@@ -77,12 +77,25 @@ function AddHostFreeform($request)
 function AddHostFromTemplate($request)
 	 {
 		$parameters = $request->output_parameters();
-		$apikey = $this->config-item('apikey');	    
+		$apikey = $this->config->item('apikey');	    
 		$key = $parameters['0']['apikey'];
 		if($key == $apikey){
 
-		//Do the actual work..
+		$template = $this->config->item('templatepath');
 		
+		//Get the template values
+		foreach($parameters['1'] as $key=>$value){
+		$templatedata[$key] = $value;
+				
+		}		   
+		$response = array(
+
+                     	                                  
+        						                                               $templatedata,
+                                                        'struct');
+
+                                return $this->xmlrpc->send_response($response);
+
 		}	
 		else{
 			return $this->xmlrpc->send_error_message('001', 'Auth Failed');
