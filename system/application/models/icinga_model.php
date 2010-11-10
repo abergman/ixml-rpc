@@ -23,5 +23,11 @@ parent::Model();
 	
 	
 	}		
+
+	function write_from_template($template,$filename,$filedata){
+
+
+
+	}
 }
 ?>
