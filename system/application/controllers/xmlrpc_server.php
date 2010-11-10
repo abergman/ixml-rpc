@@ -79,23 +79,27 @@ function AddHostFromTemplate($request)
 		$parameters = $request->output_parameters();
 		$apikey = $this->config->item('apikey');	    
 		$key = $parameters['0']['apikey'];
+		$requestdata['template'] = "";
 		if($key == $apikey){
 
 		$template = $this->config->item('templatepath');
 		
 		//Get the template values
 		foreach($parameters['1'] as $key=>$value){
-		$templatedata[$key] = $value;
+		$requestdata[$key] = $value;
 				
 		}		   
 		//Check if templatename is set
-		if(!$templatedata['template']){
+		if(!$requestdata['template']){
 		return $this->xmlrpc->send_error_message('004', 'No template specified');
-		}else{
-		//If it is set.. keep on rockin'
-		
-		//Send values to method for eval and if lucky, writing
-		
+		}elseif(!$requestdata['hostname']){
+		return $this->xmlrpc->send_error_message('006', 'No hostname specified');
+		}elseif(!$requestdata['address']){
+		return $this->xmlrpc->send_error_message('007', 'No hostadress specified')
+		}
+		$this->icinga_method->AddHostFromTemplate($requestdata['template']);
+				
+
 		//If the values is the request don't exist in the template as placeholders, send 005 Values out of bounds
 
 		$response = array(

@@ -42,4 +42,6 @@ The method creates an host from a template based on values passed on by the clie
 003 Write failed - If the writing of a file failed, this error is shown, most likely it failed due to wrong permissions.
 004 No template specified - If using the template methods and the second array don't contain the 'template' value.	
 005 Values out of bounds - If using the template methods and the values from the client don't exist as placeholders, this is sent
+006 No hostname specified - Same as 005 but the hostname is missing
+007 No hostadress specified - Same as 005 but hostadress is missing
 
