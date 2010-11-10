@@ -8,7 +8,7 @@ class Xmlrpc_server extends Controller {
 		$this->load->library('xmlrpcs');
 		$this->load->helper('file');		
 		$config['functions']['AddHostFreeform'] = array('function' => 'Xmlrpc_server.AddHostFreeform');
-		
+		$this->load->model('Icinga_model');
 		$this->xmlrpcs->initialize($config);
 		$this->xmlrpcs->serve();
 	}
@@ -48,7 +48,7 @@ function AddHostFreeform($request)
 		 $filedata .= "}";
 		 
 		 //If file cannot be written
-		 if(!write_file($filename, $filedata)){
+		 if(!$this->Icinga_model->write_host($filename, $filedata)){
 		 return $this->xmlrpc->send_error_message('003', 'Write Failed');
 		 }
 		 //If everything seems ok
