@@ -95,8 +95,9 @@ function AddHostFromTemplate($request)
 		}elseif(!$requestdata['hostname']){
 		return $this->xmlrpc->send_error_message('006', 'No hostname specified');
 		}elseif(!$requestdata['address']){
-		return $this->xmlrpc->send_error_message('007', 'No hostadress specified')
-		}
+		return $this->xmlrpc->send_error_message('007', 'No hostadress specified');
+		}else{
+
 		$this->icinga_method->AddHostFromTemplate($requestdata['template']);
 				
 
