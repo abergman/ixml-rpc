@@ -7,10 +7,12 @@ class Xmlrpc_server extends Controller {
 		$this->load->library('xmlrpc');
 		$this->load->library('xmlrpcs');
 		$this->load->helper('file');		
+		
 		$config['functions']['AddHostFreeform'] = array('function' => 'Xmlrpc_server.AddHostFreeform');
 		$this->load->model('Icinga_model');
 		$this->xmlrpcs->initialize($config);
 		$this->xmlrpcs->serve();
+		
 	}
 	
 function AddHostFreeform($request)
@@ -19,12 +21,12 @@ function AddHostFreeform($request)
                 $parameters = $request->output_parameters();
 
                 //Api key for client
-		$key = "test1";
+		$key = $this->config->item('apikey');
 
 		//get apikey from request
 		$apikey = $parameters['0']['apikey'];
 		$hostname = $parameters['1']['host'];
-		$filename = "/var/www/domains/".$hostname.".cfg"; 
+		$filename = $this->config->item('hostspath').$hostname.".cfg"; 
 		//Logic to fail if hostname-parameter is not sent		
 
 		if($apikey == $key){
